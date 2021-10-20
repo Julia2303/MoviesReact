@@ -1,0 +1,107 @@
+@import 'variables';
+
+html {
+  font-size: 25px;
+  line-height: 21px;
+  letter-spacing: 1px;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto-Regular, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: $color-white;
+  box-sizing: border-box;
+}
+
+button {
+  font-family: inherit;
+  font-size: 1rem;
+  color: inherit;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 4vw;
+  //height: $header-height;
+  background-color: $color-grey-300;
+  &__logo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 7vw;
+    height: 100%;
+    gap: 7%;
+  }
+  &__logo-image {
+    width: 50%;
+    height: 50%;
+  }
+  &__text {
+    font-size: 25px;
+  }
+  &__button {
+    padding: 1% 1.5%;
+    background-color: $color-grey-300;
+  }
+  &__icon {
+    margin-left: 7px;
+    vertical-align: middle;
+    fill: $color-grey-100;
+  }
+}
+
+.main {
+  padding: 60px 30px;
+  background-color: $color-grey-100;
+  &__title {
+    color: $color-grey-300;
+  }
+  &__pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__button {
+    padding: 10px 20px;
+    background-color: $color-grey-100;
+    border: $border-size-base solid $color-grey-200;
+    color: $color-grey-300;
+  }
+}
+
+.main__button:first-child,
+.main__button:last-child,
+.active-page {
+  color: $color-green;
+}
+
+.active-page {
+  font-weight: 700;
+}
+
+.movie-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  &__movie {
+    margin-bottom: 2%;
+  }
+  &__movie-image {
+    height: 450px;
+    width: 280px;
+    object-fit: cover;
+    border-radius: 3%;
+    box-shadow: 10px 10px 10px $color-grey-300;
+  }
+}
+
+@font-face {
+  font-family: Roboto-Regular;
+  src: url(fonts/Roboto-Regular.ttf);
+}
