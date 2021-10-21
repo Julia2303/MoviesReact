@@ -40,14 +40,11 @@ button {
     width: 50%;
     height: 50%;
   }
-  &__text {
-    font-size: 25px;
-  }
   &__button {
     padding: 1% 1.5%;
     background-color: $color-grey-300;
   }
-  &__icon {
+  &__button-icon {
     margin-left: 7px;
     vertical-align: middle;
     fill: $color-grey-100;
@@ -60,27 +57,6 @@ button {
   &__title {
     color: $color-grey-300;
   }
-  &__pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  &__button {
-    padding: 10px 20px;
-    background-color: $color-grey-100;
-    border: $border-size-base solid $color-grey-200;
-    color: $color-grey-300;
-  }
-}
-
-.main__button:first-child,
-.main__button:last-child,
-.active-page {
-  color: $color-green;
-}
-
-.active-page {
-  font-weight: 700;
 }
 
 .movie-list {
@@ -98,6 +74,38 @@ button {
     object-fit: cover;
     border-radius: 3%;
     box-shadow: 10px 10px 10px $color-grey-300;
+    cursor: pointer;
+  }
+}
+
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__button {
+    padding: 10px 20px;
+    background-color: $color-grey-100;
+    border: $border-size-base solid $color-grey-200;
+    color: $color-grey-300;
+    cursor: pointer;
+
+    &--disabled {
+      pointer-events: none;
+    }
+
+    &--removed {
+      display: none;
+    }
+
+    &--active {
+      color: $color-green;
+      font-weight: 700;
+    }
+  }
+  &__button:first-child,
+  &__button:last-child,{
+    color: $color-green;
   }
 }
 

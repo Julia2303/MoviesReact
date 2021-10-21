@@ -1,24 +1,58 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
-function Pagination({ totalPages, paginate }) {
-    const pageNumbers = [];
+const Pagination = props => {
+    const { totalPages, paginate, currentPage } = props;
+    const classRemoved = `${currentPage === totalPages ? 'pagination__button--removed' : ''}`;
 
-    for (let i = 1; i <= 3; i++) {
-        pageNumbers.push(i);
-    }
-    return <div className="main__pagination">
+    const paginationRange = useMemo(() => {
+        if(currentPage === totalPages || currentPage === totalPages - 1) {
+            return [totalPages - 1, totalPages];
+        }
+        const arr = [];
+        for (let i = currentPage; i <= currentPage + 2; i++) {
+            arr.push(i);
+        }
+        console.log(arr)
+        return arr;
+    }, [currentPage, totalPages]);
 
-        <button className="main__button">First</button>
-        <button className="main__button">Prev</button>
-        {pageNumbers.map(number =>
-            <button key={number} className="main__button">
-                <span>{number}</span>
-            </button>
-        )}
-        <button className="main__button">...</button>
-        <button className="main__button">Next</button>
-        <button className="main__button">Last</button>
+    const onNext = () => {
+        paginate(currentPage + 1);
+    };
+
+    const onPrevious = () => {
+        paginate(currentPage - 1);
+    };
+
+    const onFirst = () => {
+        paginate(1);
+    };
+
+    const onLast = () => {
+        paginate(totalPages);
+    };
+
+    return <div className="pagination">
+
+        <button onClick={onFirst} className="pagination__button">First</button>
+        <button onClick={onPrevious}
+                className={`pagination__button ${currentPage === 1 ? 'pagination__button--disabled' : ''}`}>Prev
+        </button>
+
+        {
+            paginationRange.map(number =>
+                <button onClick={() => paginate(number)} key={number}
+                        className={`pagination__button ${currentPage === number ? 'pagination__button--active' : ''}`}
+                >
+                    <span>{number}</span>
+                </button>
+            )
+        }
+
+        <button className={`pagination__button ${classRemoved}`}>...</button>
+        <button onClick={onNext} className={`pagination__button ${classRemoved}`}>Next</button>
+        <button onClick={onLast} className={`pagination__button ${classRemoved}`}>Last</button>
     </div>;
-}
+};
 
 export default Pagination;

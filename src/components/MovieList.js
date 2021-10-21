@@ -1,17 +1,23 @@
 import React from 'react';
 
-function MovieList(props) {
-    const { movies } = props;
-    const baseImgUrl = 'https://image.tmdb.org/t/p/w300';
+const MovieList = props => {
+    const { movieList } = props;
+    const baseImgURL = 'https://image.tmdb.org/t/p/w300';
+
     return <div className="movie-list">
         {
-            movies.map(movie =>
+            movieList.map(movie =>
                 <div className="movie-list__movie" key={movie.id}>
-                    <img src={`${baseImgUrl}${movie.poster_path}`} alt="" className="movie-list__movie-image" />
+                    <img src={`${baseImgURL}${movie.poster_path}`} onError={
+                            e => {
+                                e.currentTarget.src = '/images/movie-poster.jpg';
+                            }
+                        } alt="" className="movie-list__movie-image" title={movie.title}
+                    />
                 </div>
             )
         }
     </div>;
-}
+};
 
 export default MovieList;
