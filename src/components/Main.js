@@ -4,14 +4,14 @@ import MovieList from './MovieList';
 import axios from 'axios';
 import Pagination from './Pagination';
 import Modal from './Modal';
+import { getImageSrc } from '../utils';
 
 const Main = () => {
     const [movieList, setMovieList] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
 
-    const [modal, setModal] = useState(false);
-    const [currentMovie, setCurrentMovie] = useState('');
+    const [currentMovie, setCurrentMovie] = useState(null);
 
     useEffect(() => {
         axios.get(
@@ -23,16 +23,19 @@ const Main = () => {
     }, [currentPage]);
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
-    const openMovie = (modal, currentMovie) => {
-        setModal(modal);
-        setCurrentMovie(currentMovie);
-    };
-
     return <main className="main">
         <p className="main__title">Latest Releases</p>
-        <MovieList movieList={movieList} openMovie={openMovie} />
-        <Pagination totalPages={totalPages} paginate={paginate} currentPage={currentPage} className="main__pagination" />
-        <Modal modal={modal} setModal={setModal} currentMovie={currentMovie} />
+        <MovieList movieList={movieList} setCurrentMovie={setCurrentMovie} getImageSrc={getImageSrc} />
+        <Pagination totalPages={totalPages} paginate={paginate} currentPage={currentPage} className=" main__pagination" />
+        {
+            currentMovie
+                ? <Modal currentMovie={currentMovie}
+                         setCurrentMovie={setCurrentMovie}
+                         getImageSrc={getImageSrc}
+                         className=" modal"
+                />
+                : null
+        }
     </main>;
 };
 
