@@ -3,11 +3,15 @@ import { apiKey } from '../config';
 import MovieList from './MovieList';
 import axios from 'axios';
 import Pagination from './Pagination';
+import Modal from './Modal';
 
 const Main = () => {
     const [movieList, setMovieList] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
+
+    const [modal, setModal] = useState(false);
+    const [currentMovie, setCurrentMovie] = useState('');
 
     useEffect(() => {
         axios.get(
@@ -17,13 +21,18 @@ const Main = () => {
                 setTotalPages(response.data.total_pages);
             });
     }, [currentPage]);
-
     const paginate = pageNumber => setCurrentPage(pageNumber);
+
+    const openMovie = (modal, currentMovie) => {
+        setModal(modal);
+        setCurrentMovie(currentMovie);
+    };
 
     return <main className="main">
         <p className="main__title">Latest Releases</p>
-        <MovieList movieList={movieList} />
-        <Pagination totalPages={totalPages} paginate={paginate} currentPage={currentPage} classname="main__pagination" />
+        <MovieList movieList={movieList} openMovie={openMovie} />
+        <Pagination totalPages={totalPages} paginate={paginate} currentPage={currentPage} className="main__pagination" />
+        <Modal modal={modal} setModal={setModal} currentMovie={currentMovie} />
     </main>;
 };
 

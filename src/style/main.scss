@@ -89,23 +89,69 @@ button {
     border: $border-size-base solid $color-grey-200;
     color: $color-grey-300;
     cursor: pointer;
-
     &--disabled {
       pointer-events: none;
     }
-
     &--removed {
       display: none;
     }
-
     &--active {
       color: $color-green;
       font-weight: 700;
     }
+    &:first-child,
+    &:last-child,{
+      color: $color-green;
+    }
   }
-  &__button:first-child,
-  &__button:last-child,{
-    color: $color-green;
+}
+
+.modal {
+  //position: fixed;
+  //left: 0;
+  //right: 0;
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  background-color: $color-grey-200;
+  overflow-y: scroll;
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 70px;
+    padding: 40px 90px;
+  }
+  &__movie-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 80%;
+    margin: 0 auto;
+  }
+  &__movie-poster {
+    height: 600px;
+    width: 420px;
+    object-fit: cover;
+    box-shadow: 10px 10px 10px $color-grey-300;
+  }
+  &__movie-info {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 60%;
+  }
+  &__button {
+    align-self: end;
+  }
+  &__movie-details {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+  }
+  &--active {
+    display: block;
   }
 }
 

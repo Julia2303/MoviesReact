@@ -1,7 +1,7 @@
 import React from 'react';
 
 const MovieList = props => {
-    const { movieList } = props;
+    const { movieList, openMovie } = props;
     const baseImgURL = 'https://image.tmdb.org/t/p/w300';
 
     return <div className="movie-list">
@@ -12,7 +12,7 @@ const MovieList = props => {
                             e => {
                                 e.currentTarget.src = '/images/movie-poster.jpg';
                             }
-                        } alt="" className="movie-list__movie-image" title={movie.title}
+                        } alt="" className="movie-list__movie-image" title={movie.title} onClick={() => openMovie(true, movie)}
                     />
                 </div>
             )

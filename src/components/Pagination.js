@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
 const Pagination = props => {
-    const { totalPages, paginate, currentPage } = props;
+    const { totalPages, paginate, currentPage, className } = props;
     const classRemoved = `${currentPage === totalPages ? 'pagination__button--removed' : ''}`;
 
     const paginationRange = useMemo(() => {
@@ -12,7 +12,6 @@ const Pagination = props => {
         for (let i = currentPage; i <= currentPage + 2; i++) {
             arr.push(i);
         }
-        console.log(arr)
         return arr;
     }, [currentPage, totalPages]);
 
@@ -32,11 +31,12 @@ const Pagination = props => {
         paginate(totalPages);
     };
 
-    return <div className="pagination">
+    return <div className={`pagination ${className}`}>
 
         <button onClick={onFirst} className="pagination__button">First</button>
         <button onClick={onPrevious}
-                className={`pagination__button ${currentPage === 1 ? 'pagination__button--disabled' : ''}`}>Prev
+                className={`pagination__button ${currentPage === 1 ? 'pagination__button--disabled' : ''}`}
+        >Prev
         </button>
 
         {
