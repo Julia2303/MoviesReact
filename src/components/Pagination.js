@@ -2,8 +2,9 @@ import React, { useMemo } from 'react';
 
 const Pagination = props => {
     const { totalPages, paginate, currentPage, className } = props;
+
     const removeButton = page => {
-        if(currentPage === page) {
+        if(currentPage >= page) {
             return ' pagination__button--removed';
         } else {
             return '';
@@ -56,7 +57,7 @@ const Pagination = props => {
             )
         }
 
-        <button className={`pagination__button${removeButton(totalPages)}${removeButton(totalPages - 1)}`}>...</button>
+        <button className={`pagination__button${removeButton(totalPages - 2)}`}>...</button>
         <button onClick={onNext} className={`pagination__button${removeButton(totalPages)}`}>Next</button>
         <button onClick={onLast} className={`pagination__button${removeButton(totalPages)}`}>Last</button>
     </div>;

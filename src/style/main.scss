@@ -24,6 +24,7 @@ button {
   font-size: 1rem;
   color: inherit;
   background-color: transparent;
+  cursor: pointer;
 }
 
 .header {
@@ -92,7 +93,6 @@ button {
     padding: 10px 20px;
     border: $border-size-base solid $color-grey-200;
     color: $color-grey-300;
-    cursor: pointer;
     &:first-child,
     &:last-child,{
       color: $color-green;
@@ -135,7 +135,7 @@ button {
     margin-bottom: 70px;
     padding: 3% 6% 2%;
     font-family: Roboto-Thin, sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
   &__header-button {
     display: flex;
@@ -143,6 +143,7 @@ button {
     justify-content: space-between;
     gap: 50px;
     width: 20%;
+    cursor: pointer;
   }
   &__header-icon {
     padding: 2.5%;
