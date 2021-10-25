@@ -21,6 +21,18 @@ const Main = () => {
                 setTotalPages(response.data.total_pages);
             });
     }, [currentPage]);
+
+    const changeMovie = () => {
+        for (let i = 0; i < movieList.length; i++) {
+            if (currentMovie === movieList[movieList.length - 1]) {
+                setCurrentPage(currentPage + 1);
+                // setCurrentMovie(movieList[0]);
+            } else if (currentMovie === movieList[i]) {
+                setCurrentMovie(movieList[i + 1]);
+            }
+        }
+    };
+
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
     return <main className="main">
@@ -33,6 +45,7 @@ const Main = () => {
                          setCurrentMovie={setCurrentMovie}
                          getImageSrc={getImageSrc}
                          className=" modal"
+                         changeMovie={changeMovie}
                 />
                 : null
         }

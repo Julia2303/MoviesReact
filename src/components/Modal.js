@@ -3,7 +3,7 @@ import { getBackdrop } from '../utils';
 import ArrowDown from './elements/Arrow';
 
 const Modal = props => {
-    const { currentMovie, setCurrentMovie, className, getImageSrc } = props;
+    const { currentMovie, setCurrentMovie, className, getImageSrc, changeMovie } = props;
 
     const fixScore = () =>
         Number.isInteger(currentMovie.vote_average)
@@ -14,14 +14,14 @@ const Modal = props => {
     return <div className={`movie-modal${className}`} style={{ backgroundImage: `url(${getBackdrop(currentMovie.backdrop_path)})` }}>
         <div className="movie-modal__container">
             <header className="movie-modal__header">
-                <div className="movie-modal__header-button">
+                <div className="movie-modal__header-button" onClick={() => setCurrentMovie(null)}>
                     <ArrowDown className="movie-modal__header-icon" />
-                    <p className="movie-modal__header-button-text" onClick={() => setCurrentMovie(null)}>
+                    <p className="movie-modal__header-button-text">
                         Back to List
                     </p>
                 </div>
                 <div className="movie-modal__header-button">
-                    <p className="movie-modal__header-button-text">Next Movie</p>
+                    <p className="movie-modal__header-button-text" onClick={() => changeMovie()}>Next Movie</p>
                     <ArrowDown className="movie-modal__header-icon" />
                 </div>
             </header>
