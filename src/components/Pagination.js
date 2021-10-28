@@ -1,7 +1,9 @@
-import React, { useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
+import { MoviesContext } from '../MoviesContext';
 
 const Pagination = props => {
-    const { totalPages, paginate, currentPage, className } = props;
+    const { className } = props;
+    const { currentPage, paginate, totalPages } = useContext(MoviesContext);
 
     const removeButton = page => {
         if(currentPage >= page) {

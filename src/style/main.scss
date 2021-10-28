@@ -27,6 +27,11 @@ button {
   cursor: pointer;
 }
 
+a {
+  text-decoration: none;
+  color: $color-white;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -47,7 +52,8 @@ button {
     height: 50%;
   }
   &__button {
-    padding: 1% 1.5%;
+    padding: 3%;
+    width: 200px;
   }
   &__button-icon {
     margin-left: 7px;
@@ -58,10 +64,10 @@ button {
 
 .main {
   padding: 60px 30px;
+  color: $color-grey-300;
   background-color: $color-grey-100;
   &__title {
-    margin-bottom: 20px;
-    color: $color-grey-300;
+    margin-bottom: 35px;
   }
 }
 
@@ -116,9 +122,11 @@ button {
   width: 100vw;
   height: 100vh;
   overflow-y: scroll;
+  color: $color-white;
 }
 
 .movie-modal {
+  height: 100%;
   background-repeat: no-repeat;
   background-size: 100vw 100vh;
   background-position: center;
@@ -126,6 +134,7 @@ button {
     width: 100%;
     height: 100%;
     backdrop-filter: blur(25px);
+    text-shadow: 0 2px 5px $color-grey-300;
   }
   &__header {
     display: flex;
@@ -167,7 +176,7 @@ button {
   &__info {
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: flex-start;
     width: 65%;
   }
   &__button {
@@ -178,6 +187,7 @@ button {
     border-width: medium;
     font-family: Roboto-Thin, sans-serif;
     color: $color-grey-100;
+    text-shadow: 0 2px 5px $color-grey-300;
     border-color: $color-grey-200;
   }
   &__title {
@@ -223,6 +233,28 @@ button {
       left: 0;
       bottom: -40px
     }
+  }
+}
+
+.favourite-movies {
+  &__movie {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 60px;
+    margin-bottom: 50px;
+  }
+  &__title {
+    margin-bottom: 55px;
+  }
+  &__top-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  &__button {
+    padding: 0.5%;
+    border-radius: 7px;
   }
 }
 
