@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { getBackdrop } from '../utils';
 import ArrowDown from './elements/Arrow';
 import { getImageSrc } from '../utils';
@@ -25,12 +25,13 @@ const MovieModal = props => {
                 <div className="movie-modal__info">
                     {
                         isMovieInFavourites
-                            ? <button className="movie-modal__button" onClick={removeFromFavourite}>Remove from
-                                favourite</button>
-                            : <button className="movie-modal__button" onClick={addToFavorite}>Add to
-                                favourite</button>
+                            ? <button className="movie-modal__button" onClick={removeFromFavourite}>
+                                Remove from favourite
+                            </button>
+                            : <button className="movie-modal__button" onClick={addToFavorite}>
+                                Add to favourite
+                            </button>
                     }
-
                     <h2 className="movie-modal__title">{movie.title}</h2>
                     <div className="movie-modal__details">
                         <p className="movie-modal__score">Score: {movie.vote_average.toFixed(1)}</p>

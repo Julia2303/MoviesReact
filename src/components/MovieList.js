@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import Pagination from './Pagination';
 import MovieModal from './MovieModal';
 import { getImageSrc } from '../utils';
@@ -6,38 +6,40 @@ import Modal from './Modal';
 import { MoviesContext } from '../MoviesContext';
 
 const MovieList = () => {
-    const { movieList, currentPage, setCurrentPage, checkMovieInFavourites, addToFavorite, removeFromFavouriteById } = useContext(MoviesContext);
+    const { movieList, currentPage, setCurrentPage, checkMovieInFavourites, addToFavorite, removeFromFavouriteById, currentMovieId, setCurrentMovieId } = useContext(MoviesContext);
 
     const onError = e => {
         e.currentTarget.src = '/images/movie-poster.jpg';
     };
 
-    const [isModalVisible, setIsModalVisible] = useState(false);
-    const [currentMovieIdx, setCurrentMovieIdx] = useState(0);
-
-    const onMovieClick = movieIdx => {
-        setIsModalVisible(true);
-        setCurrentMovieIdx(movieIdx);
+    const onMovieClick = movieId => {
+        setCurrentMovieId(movieId);
     };
 
-    useEffect(() => {
-        setCurrentMovieIdx(0);
-    }, [currentPage]);
+    // useEffect(() => {
+    //
+    // }, [currentPage]);
 
     const onNextMovieClick = () => {
-        if (currentMovieIdx === movieList.length - 1) {
+        if (currentMovieId === movieList[movieList.length - 1].id) {
             setCurrentPage(currentPage + 1);
         } else {
-            setCurrentMovieIdx(currentMovieIdx + 1);
+            const nextMovieId = movieList.reduce((acc, movie, index) => {
+                if (currentMovieId === movie.id) {
+                    acc = movieList[index + 1].id;
+                }
+                return acc;
+            }, null);
+            setCurrentMovieId(nextMovieId);
         }
     };
 
     const onAddToFavorite = () => {
-        addToFavorite(movieList[currentMovieIdx]);
+        addToFavorite(movieList.find(movie => movie.id === currentMovieId));
     };
 
     const onRemoveFromFavourite = () => {
-        removeFromFavouriteById(movieList[currentMovieIdx].id);
+        removeFromFavouriteById(currentMovieId);
     };
 
 
@@ -45,27 +47,27 @@ const MovieList = () => {
         <p className="main__title">Latest Releases</p>
         <div className="movie-list">
             {
-                movieList.map((movie, idx) =>
+                movieList.map(movie =>
                     <div className="movie-list__movie" key={movie.id}>
                         <img src={getImageSrc(movie.poster_path)}
                              onError={onError}
                              alt=""
                              className="movie-list__movie-image"
                              title={movie.title}
-                             onClick={() => onMovieClick(idx)}
+                             onClick={() => onMovieClick(movie.id)}
                         />
                     </div>
                 )
             }
-        </div>;
-        <Pagination className=" main__pagination" />
+        </div>
+        <Pagination className="main__pagination" />
         {
-            isModalVisible
+            currentMovieId
                  && <Modal>
-                     <MovieModal movie={movieList[currentMovieIdx]}
-                                 onClose={() => setIsModalVisible(false)}
+                     <MovieModal movie={movieList.find(movie => movie.id === currentMovieId)}
+                                 onClose={() => setCurrentMovieId(null)}
                                  onNextMovie={onNextMovieClick}
-                                 isMovieInFavourites={checkMovieInFavourites(movieList[currentMovieIdx].id)}
+                                 isMovieInFavourites={checkMovieInFavourites(currentMovieId)}
                                  addToFavorite={onAddToFavorite}
                                  removeFromFavourite={onRemoveFromFavourite}
                      />

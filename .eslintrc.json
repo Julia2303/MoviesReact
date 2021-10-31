@@ -233,13 +233,13 @@
       "no-template-curly-in-string": "error",
       "no-trailing-spaces": "error",
       "no-unneeded-ternary": [
-        "warn",
+        "error",
         {
           "defaultAssignment": false
         }
       ],
       "no-unused-vars": [
-        "warn", {
+        "error", {
           "args": "none",
           "caughtErrors": "all",
           "ignoreRestSiblings": true,

@@ -1,43 +1,50 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { MoviesContext } from '../MoviesContext';
 import { getImageSrc } from '../utils';
 import Modal from './Modal';
 import MovieModal from './MovieModal';
 
 const Favourites = () => {
-    const { favoriteMovies, removeFromFavouriteById, checkMovieInFavourites } = useContext(MoviesContext);
+    const { favoriteMovies, removeFromFavouriteById, checkMovieInFavourites, currentMovieId, setCurrentMovieId } = useContext(MoviesContext);
 
-    const [isModalVisible, setIsModalVisible] = useState(false);
-    const [currentMovieIdx, setCurrentMovieIdx] = useState(0);
-
-    const onMovieClick = movieIdx => {
-        setIsModalVisible(true);
-        setCurrentMovieIdx(movieIdx);
+    const onMovieClick = movieId => {
+        setCurrentMovieId(movieId);
     };
 
     const onNextMovieClick = () => {
-        if (currentMovieIdx + 1 === favoriteMovies.length) {
-            setCurrentMovieIdx(0);
+        if (currentMovieId === favoriteMovies[favoriteMovies.length - 1].id) {
+            setCurrentMovieId(favoriteMovies[0].id);
         } else {
-            setCurrentMovieIdx(currentMovieIdx + 1);
+            const nextMovieId = favoriteMovies.reduce((acc, movie, index) => {
+                if (currentMovieId === movie.id) {
+                    acc = favoriteMovies[index + 1].id;
+                }
+                return acc;
+            }, null);
+            setCurrentMovieId(nextMovieId);
         }
     };
 
     const onRemoveFromFavourite = () => {
-        removeFromFavouriteById(favoriteMovies[currentMovieIdx].id);
+        removeFromFavouriteById(currentMovieId);
+        if (favoriteMovies.length > 1) {
+            onNextMovieClick();
+        } else {
+            setCurrentMovieId(null);
+        }
     };
 
     return <main className="main">
         <p className="main__title">My favourite</p>
         <div className="favourite-movies">
             {
-                favoriteMovies.map((movie, idx) =>
+                favoriteMovies.map(movie =>
                     <div className="favourite-movies__movie" key={movie.id}>
                         <img src={getImageSrc(movie.poster_path)}
                              alt=""
-                             className="favourite-movies__movie-image"
+                             className="favourite-movies__image"
                              title={movie.title}
-                             onClick={() => onMovieClick(idx)}
+                             onClick={() => onMovieClick(movie.id)}
                         />
                         <div className="favourite-movies__info">
                             <div className="favourite-movies__top-info">
@@ -53,12 +60,12 @@ const Favourites = () => {
             }
         </div>
         {
-            isModalVisible
+            currentMovieId
             && <Modal>
-                <MovieModal movie={favoriteMovies[currentMovieIdx]}
-                            onClose={() => setIsModalVisible(false)}
+                <MovieModal movie={favoriteMovies.find(movie => movie.id === currentMovieId)}
+                            onClose={() => setCurrentMovieId(null)}
                             onNextMovie={onNextMovieClick}
-                            isMovieInFavourites={checkMovieInFavourites(favoriteMovies[currentMovieIdx].id)}
+                            isMovieInFavourites={checkMovieInFavourites(currentMovieId)}
                             removeFromFavourite={onRemoveFromFavourite}
                 />
             </Modal>

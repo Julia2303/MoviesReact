@@ -10,7 +10,7 @@ export const MoviesProvider = ({ children }) => {
     const [movieList, setMovieList] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
-    const [currentMovie, setCurrentMovie] = useState(null);
+    const [currentMovieId, setCurrentMovieId] = useState(null);
 
     useEffect(() => {
         axios.get(
@@ -18,6 +18,10 @@ export const MoviesProvider = ({ children }) => {
             .then(response => {
                 setMovieList(response.data.results);
                 setTotalPages(response.data.total_pages);
+                window.scrollTo(0, 0);
+                if (currentMovieId) {
+                    setCurrentMovieId(response.data.results[0].id);
+                }
             });
     }, [currentPage]);
 
@@ -44,22 +48,22 @@ export const MoviesProvider = ({ children }) => {
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
     return <MoviesContext.Provider value={
-{
-    movieList,
-    setMovieList,
-    currentPage,
-    setCurrentPage,
-    totalPages,
-    setTotalPages,
-    currentMovie,
-    setCurrentMovie,
-    paginate,
-    favoriteMovies,
-    addToFavorite,
-    checkMovieInFavourites,
-    removeFromFavouriteById
-}
-}
+    {
+        movieList,
+        setMovieList,
+        currentPage,
+        setCurrentPage,
+        totalPages,
+        setTotalPages,
+        paginate,
+        favoriteMovies,
+        addToFavorite,
+        checkMovieInFavourites,
+        removeFromFavouriteById,
+        currentMovieId,
+        setCurrentMovieId
+    }
+    }
     >
         {children}
     </MoviesContext.Provider>;
