@@ -40,7 +40,7 @@ const Pagination = props => {
         paginate(totalPages);
     };
 
-    return <div className={`pagination${className}`}>
+    return <div className={`pagination ${className}`}>
 
         <button onClick={onFirst} className="pagination__button">First</button>
         <button onClick={onPrevious}

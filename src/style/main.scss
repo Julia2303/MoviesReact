@@ -6,6 +6,7 @@
 }
 
 html {
+  scroll-behavior: smooth;
   font-size: 27px;
   line-height: 30px;
   letter-spacing: 1px;
@@ -243,6 +244,9 @@ a {
     align-items: flex-start;
     gap: 60px;
     margin-bottom: 50px;
+  }
+  &__image {
+    cursor: pointer;
   }
   &__title {
     margin-bottom: 55px;
