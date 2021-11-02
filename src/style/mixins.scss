@@ -1,0 +1,55 @@
+@import 'variables';
+
+@mixin media-desktop() {
+  @media (min-width: $md + 1), (orientation: landscape) {
+    @content;
+  }
+}
+
+@mixin media-mobile() {
+  @media (max-width: $md) and (orientation: portrait) {
+    @content;
+  }
+}
+
+@mixin media-breakpoint-up($breakpoint) {
+  @media (min-width: $breakpoint + 1) {
+    @content;
+  }
+}
+
+@mixin media-breakpoint-down($breakpoint) {
+  @media (max-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin inline-space($space) {
+  &:not(:last-child) {
+    margin-right: $space;
+  }
+}
+
+@mixin stack-space($space) {
+  &:not(:last-child) {
+    margin-bottom: $space;
+  }
+}
+
+@mixin font-size-responsive($font-size) {
+  @include media-desktop {
+    font-size: $font-size / 1280 * 100vw;
+  }
+  @include media-mobile {
+    font-size: $font-size / 375 * 100vw;
+  }
+}
+
+@mixin line-height-responsive($line-height) {
+  @include media-desktop {
+    line-height: $line-height / 1280 * 100vw;
+  }
+  @include media-mobile {
+    line-height: $line-height / 375 * 100vw;
+  }
+}

@@ -37,6 +37,8 @@ const MovieModal = props => {
                         <p className="movie-modal__score">Score: {movie.vote_average.toFixed(1)}</p>
                         <p className="movie-modal__release-date">Release Date: {movie.release_date}</p>
                     </div>
+                </div>
+                <div className="movie-modal__description-container">
                     <p className="movie-modal__description">
                         {movie.overview}
                     </p>

@@ -8,7 +8,7 @@ const Header = () => {
             <img className="header__logo-image" src="/images/header-logo.svg" alt="" />
             <p className="header__logo-text">Movies</p>
         </Link>
-        <Link to="/favourites">
+        <Link to="/favourites" className="header__account-link">
             <button className="header__button">
                 <span className="header__button-content">My Account</span>
                 <ArrowDown className="header__button-icon" />

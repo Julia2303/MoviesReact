@@ -1,4 +1,4 @@
-@import 'variables';
+@import 'variables', 'mixins';
 
 * {
   margin: 0;
@@ -7,9 +7,9 @@
 
 html {
   scroll-behavior: smooth;
-  font-size: 27px;
-  line-height: 30px;
-  letter-spacing: 1px;
+  @include font-size-responsive(21);
+  @include line-height-responsive(25);
+  letter-spacing: $letter-spacing;
 }
 
 body {
@@ -21,8 +21,10 @@ body {
 }
 
 button {
+  @include font-size-responsive(19);
+  @include line-height-responsive(23);
   font-family: inherit;
-  font-size: 1rem;
+  letter-spacing: $letter-spacing;
   color: inherit;
   background-color: transparent;
   cursor: pointer;
@@ -30,60 +32,81 @@ button {
 
 a {
   text-decoration: none;
-  color: $color-white;
+  color: inherit;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 4vw;
-  //height: $header-height;
+  height: $header-height;
+  padding: $space-16;
   background-color: $color-grey-300;
   &__logo {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 7vw;
+    gap: 10%;
     height: 100%;
-    gap: 7%;
   }
   &__logo-image {
-    width: 50%;
-    height: 50%;
+    height: 100%;
+  }
+  &__account-link {
+    height: 100%;
   }
   &__button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    //width: 200px;
+    height: 100%;
     padding: 3%;
-    width: 200px;
   }
   &__button-icon {
     margin-left: 7px;
     vertical-align: middle;
     fill: $color-grey-100;
   }
+  &__button-content {
+    @include media-mobile {
+      display: none;
+    }
+  }
 }
 
 .main {
-  padding: 60px 30px;
+  padding: $space-30 $space-16;
   color: $color-grey-300;
   background-color: $color-grey-100;
   &__title {
-    margin-bottom: 35px;
+    margin-bottom: $space-17;
   }
 }
 
 .movie-list {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-column-gap: 25px;
+  grid-row-gap: $space-18;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
+  align-items: stretch;
+  margin-bottom: $space-30;
+  @include media-breakpoint-down($bg) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  @include media-mobile {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @include media-breakpoint-down($sm) {
+    grid-template-columns: repeat(2, 1fr);
+  }
   &__movie {
-    margin-bottom: 2%;
+
   }
   &__movie-image {
-    height: 510px;
-    width: 340px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     border-radius: 3%;
     box-shadow: 10px 10px 10px $color-grey-300;
@@ -96,7 +119,7 @@ a {
   justify-content: center;
   align-items: center;
   &__button {
-    padding: 10px 20px;
+    padding: 1% 2%;
     border: $border-size-base solid $color-grey-200;
     color: $color-grey-300;
     &:first-child,
@@ -122,7 +145,6 @@ a {
   left: 0;
   width: 100vw;
   height: 100vh;
-  overflow-y: scroll;
   color: $color-white;
 }
 
@@ -135,13 +157,13 @@ a {
     width: 100%;
     height: 100%;
     backdrop-filter: blur(25px);
-    text-shadow: 0 2px 5px $color-grey-300;
+    text-shadow: 1px 2px 5px $color-black;
   }
   &__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 70px;
+    margin-bottom: 50px;
     padding: 3% 6% 2%;
     font-family: Roboto-Thin, sans-serif;
     font-size: 1.4rem;
@@ -164,21 +186,33 @@ a {
     }
   }
   &__content {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "poster info"
+      "poster description";
+    grid-column-gap: 50px;
     margin: 0 auto;
     width: 80%;
+    @include media-mobile {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+      grid-template-areas:
+        "poster info"
+        "description description";
+    }
   }
   &__poster {
+    grid-area: poster;
     width: 420px;
     box-shadow: 0 0 30px 10px $color-grey-300;
   }
   &__info {
+    grid-area: info;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 65%;
   }
   &__button {
     align-self: end;
@@ -218,6 +252,7 @@ a {
     }
   }
   &__description {
+    grid-area: description;
     position: relative;
     &:before,
     &:after {
