@@ -53,3 +53,32 @@
     line-height: $line-height / 375 * 100vw;
   }
 }
+
+@mixin size-responsive($width, $height: $width) {
+  @include media-desktop {
+    width: $width / 1280 * 100vw;
+    height: $height / 1280 * 100vw;
+  }
+  @include media-mobile {
+    width: $width / 375 * 100vw;
+    height: $height / 375 * 100vw;
+  }
+}
+
+@mixin width-responsive($width) {
+  @include media-desktop {
+    width: $width / 1280 * 100vw;
+  }
+  @include media-mobile {
+    width: $width / 375 * 100vw;
+  }
+}
+
+@mixin height-responsive($height) {
+  @include media-desktop {
+    height: $height / 1280 * 100vw;
+  }
+  @include media-mobile {
+    height: $height / 375 * 100vw;
+  }
+}

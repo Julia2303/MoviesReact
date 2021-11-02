@@ -51,9 +51,11 @@ const Favourites = () => {
                                 <h2 className="favourite-movies__title">{movie.title}</h2>
                                 <button className="favourite-movies__button" onClick={() => removeFromFavouriteById(movie.id)}>Unfavourite</button>
                             </div>
-                            <p className="favourite-movies__description">
-                                {movie.overview}
-                            </p>
+                            <div className="favourite-movies__description-container">
+                                <p className="favourite-movies__description">
+                                    {movie.overview}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 )
