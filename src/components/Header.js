@@ -10,7 +10,7 @@ const Header = () => {
         </Link>
         <Link to="/favourites" className="header__account-link">
             <button className="header__button">
-                <span className="header__button-content">My Account</span>
+                <span className="hide-on-mobile">My Account</span>
                 <ArrowDown className="header__button-icon" />
             </button>
         </Link>

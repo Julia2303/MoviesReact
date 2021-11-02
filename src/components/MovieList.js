@@ -6,7 +6,16 @@ import Modal from './Modal';
 import { MoviesContext } from '../MoviesContext';
 
 const MovieList = () => {
-    const { movieList, currentPage, setCurrentPage, checkMovieInFavourites, addToFavorite, removeFromFavouriteById, currentMovieId, setCurrentMovieId } = useContext(MoviesContext);
+    const {
+        movieList,
+        currentPage,
+        setCurrentPage,
+        checkMovieInFavourites,
+        addToFavorite,
+        removeFromFavouriteById,
+        currentMovieId,
+        setCurrentMovieId
+    } = useContext(MoviesContext);
 
     const onError = e => {
         e.currentTarget.src = '/images/movie-poster.jpg';
@@ -15,10 +24,6 @@ const MovieList = () => {
     const onMovieClick = movieId => {
         setCurrentMovieId(movieId);
     };
-
-    // useEffect(() => {
-    //
-    // }, [currentPage]);
 
     const onNextMovieClick = () => {
         if (currentMovieId === movieList[movieList.length - 1].id) {
