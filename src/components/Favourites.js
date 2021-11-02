@@ -5,19 +5,19 @@ import Modal from './Modal';
 import MovieModal from './MovieModal';
 
 const Favourites = () => {
-    const { favoriteMovies, removeFromFavouriteById, checkMovieInFavourites, currentMovieId, setCurrentMovieId } = useContext(MoviesContext);
+    const { favouriteMovies, removeFromFavouriteById, checkMovieInFavourites, currentMovieId, setCurrentMovieId } = useContext(MoviesContext);
 
     const onMovieClick = movieId => {
         setCurrentMovieId(movieId);
     };
 
     const onNextMovieClick = () => {
-        if (currentMovieId === favoriteMovies[favoriteMovies.length - 1].id) {
-            setCurrentMovieId(favoriteMovies[0].id);
+        if (currentMovieId === favouriteMovies[favouriteMovies.length - 1].id) {
+            setCurrentMovieId(favouriteMovies[0].id);
         } else {
-            const nextMovieId = favoriteMovies.reduce((acc, movie, index) => {
+            const nextMovieId = favouriteMovies.reduce((acc, movie, index) => {
                 if (currentMovieId === movie.id) {
-                    acc = favoriteMovies[index + 1].id;
+                    acc = favouriteMovies[index + 1].id;
                 }
                 return acc;
             }, null);
@@ -27,7 +27,7 @@ const Favourites = () => {
 
     const onRemoveFromFavourite = () => {
         removeFromFavouriteById(currentMovieId);
-        if (favoriteMovies.length > 1) {
+        if (favouriteMovies.length > 1) {
             onNextMovieClick();
         } else {
             setCurrentMovieId(null);
@@ -38,7 +38,7 @@ const Favourites = () => {
         <p className="main__title">My favourite</p>
         <div className="favourite-movies">
             {
-                favoriteMovies.map(movie =>
+                favouriteMovies.map(movie =>
                     <div className="favourite-movies__movie" key={movie.id}>
                         <img src={getImageSrc(movie.poster_path)}
                              alt=""
@@ -64,7 +64,7 @@ const Favourites = () => {
         {
             currentMovieId
             && <Modal>
-                <MovieModal movie={favoriteMovies.find(movie => movie.id === currentMovieId)}
+                <MovieModal movie={favouriteMovies.find(movie => movie.id === currentMovieId)}
                             onClose={() => setCurrentMovieId(null)}
                             onNextMovie={onNextMovieClick}
                             isMovieInFavourites={checkMovieInFavourites(currentMovieId)}

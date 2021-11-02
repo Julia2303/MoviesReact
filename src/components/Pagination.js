@@ -17,11 +17,7 @@ const Pagination = props => {
         if (currentPage === totalPages || currentPage === totalPages - 1) {
             return [totalPages - 1, totalPages];
         }
-        const arr = [];
-        for (let i = currentPage; i <= currentPage + 2; i++) {
-            arr.push(i);
-        }
-        return arr;
+        return [currentPage, currentPage + 1, currentPage + 2];
     }, [currentPage, totalPages]);
 
     const onNext = () => {

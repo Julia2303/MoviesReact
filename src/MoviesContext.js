@@ -1,12 +1,21 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState, useReducer } from 'react';
+import AppReducer from './AppReducer';
 import axios from 'axios';
 import { apiKey } from './config';
 import { readFavouriteMovies, saveFavouriteMovies } from './storageUtils';
 
-export const MoviesContext = createContext({});
+//initial state
+const initialState = {
+    favouriteMovies: readFavouriteMovies('favouriteMovies')
+};
 
+//create context
+export const MoviesContext = createContext(initialState);
+
+//provider components
 export const MoviesProvider = ({ children }) => {
-    const [favoriteMovies, setFavoriteMovies] = useState([]);
+    const [state, dispatch] = useReducer(AppReducer, initialState);
+
     const [movieList, setMovieList] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
@@ -25,24 +34,21 @@ export const MoviesProvider = ({ children }) => {
             });
     }, [currentPage]);
 
-    const addToFavorite = movie => {
-        const newFavoriteMovies = [...favoriteMovies, movie];
-        setFavoriteMovies(newFavoriteMovies);
-        saveFavouriteMovies(newFavoriteMovies);
+    //actions
+    const addToFavourite = movie => {
+        dispatch({ type: 'ADD_MOVIE_TO_FAVOURITES', payload: movie });
     };
 
     const removeFromFavouriteById = id => {
-        const newFavoriteMovies = favoriteMovies.filter(movie => movie.id !== id);
-        setFavoriteMovies(newFavoriteMovies);
-        saveFavouriteMovies(newFavoriteMovies);
+        dispatch({ type: 'REMOVE_MOVIE_FROM_FAVOURITE', payload: id });
     };
 
     useEffect(() => {
-        setFavoriteMovies(readFavouriteMovies());
-    }, []);
+        saveFavouriteMovies(state.favouriteMovies);
+    }, [state]);
 
     const checkMovieInFavourites = id => {
-        return favoriteMovies.find(movie => movie.id === id);
+        return state.favouriteMovies.find(movie => movie.id === id);
     };
 
     const paginate = pageNumber => setCurrentPage(pageNumber);
@@ -56,8 +62,8 @@ export const MoviesProvider = ({ children }) => {
         totalPages,
         setTotalPages,
         paginate,
-        favoriteMovies,
-        addToFavorite,
+        favouriteMovies: state.favouriteMovies,
+        addToFavourite,
         checkMovieInFavourites,
         removeFromFavouriteById,
         currentMovieId,

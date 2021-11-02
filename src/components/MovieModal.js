@@ -4,7 +4,7 @@ import ArrowDown from './elements/Arrow';
 import { getImageSrc } from '../utils';
 
 const MovieModal = props => {
-    const { movie, onClose, onNextMovie, isMovieInFavourites, addToFavorite, removeFromFavourite } = props;
+    const { movie, onClose, onNextMovie, isMovieInFavourites, addToFavourite, removeFromFavourite } = props;
 
     return <div className="movie-modal" style={{ backgroundImage: `url(${getBackdrop(movie.backdrop_path)})` }}>
         <div className="movie-modal__container">
@@ -30,7 +30,7 @@ const MovieModal = props => {
                             ? <button className="movie-modal__button" onClick={removeFromFavourite}>
                                 Remove <span className="hide-on-mobile">from favourite</span>
                             </button>
-                            : <button className="movie-modal__button" onClick={addToFavorite}>
+                            : <button className="movie-modal__button" onClick={addToFavourite}>
                                 Add <span className="hide-on-mobile">to favourite</span>
                             </button>
                     }

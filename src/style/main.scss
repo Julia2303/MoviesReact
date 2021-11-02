@@ -351,10 +351,10 @@ a {
     }
   }
   &__image {
-    @include size-responsive(340);
+    @include height-responsive(340);
     cursor: pointer;
     @include media-mobile {
-      @include size-responsive(200);
+      @include height-responsive(200);
     }
   }
   &__title {

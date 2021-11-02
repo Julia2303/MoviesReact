@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 import Pagination from './Pagination';
 import MovieModal from './MovieModal';
 import { getImageSrc } from '../utils';
@@ -11,7 +11,7 @@ const MovieList = () => {
         currentPage,
         setCurrentPage,
         checkMovieInFavourites,
-        addToFavorite,
+        addToFavourite,
         removeFromFavouriteById,
         currentMovieId,
         setCurrentMovieId
@@ -20,6 +20,11 @@ const MovieList = () => {
     const onError = e => {
         e.currentTarget.src = '/images/movie-poster.jpg';
     };
+
+    const currentMovie = movieList.find(movie => movie.id === currentMovieId);
+    // const currentMovie = useMemo(() => {
+    //     movieList.find(movie => movie.id === currentMovieId);
+    // }, [currentMovieId]);
 
     const onMovieClick = movieId => {
         setCurrentMovieId(movieId);
@@ -39,14 +44,13 @@ const MovieList = () => {
         }
     };
 
-    const onAddToFavorite = () => {
-        addToFavorite(movieList.find(movie => movie.id === currentMovieId));
+    const onAddToFavourite = () => {
+        addToFavourite(currentMovie);
     };
 
     const onRemoveFromFavourite = () => {
         removeFromFavouriteById(currentMovieId);
     };
-
 
     return <main className="main">
         <p className="main__title">Latest Releases</p>
@@ -67,13 +71,13 @@ const MovieList = () => {
         </div>
         <Pagination className="main__pagination" />
         {
-            currentMovieId
+            currentMovie
                  && <Modal>
-                     <MovieModal movie={movieList.find(movie => movie.id === currentMovieId)}
+                     <MovieModal movie={currentMovie}
                                  onClose={() => setCurrentMovieId(null)}
                                  onNextMovie={onNextMovieClick}
                                  isMovieInFavourites={checkMovieInFavourites(currentMovieId)}
-                                 addToFavorite={onAddToFavorite}
+                                 addToFavourite={onAddToFavourite}
                                  removeFromFavourite={onRemoveFromFavourite}
                      />
                  </Modal>
