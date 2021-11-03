@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useContext } from 'react';
 import Pagination from './Pagination';
 import MovieModal from './MovieModal';
 import { getImageSrc } from '../utils';

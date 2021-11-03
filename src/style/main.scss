@@ -71,7 +71,7 @@ a {
     justify-content: space-around;
     align-items: center;
     height: 100%;
-    padding: 3%;
+    padding: 10px;
     @include media-mobile {
       @include size-responsive(40);
     }
@@ -90,8 +90,14 @@ a {
   padding: $space-30 $space-16;
   color: $color-grey-300;
   background-color: $color-grey-100;
+  @include media-mobile {
+    padding-top: $space-13;
+  }
   &__title {
     margin-bottom: $space-17;
+    @include media-mobile {
+      margin-bottom: $space-13;
+    }
   }
 }
 
@@ -112,9 +118,6 @@ a {
   @include media-breakpoint-down($sm) {
     grid-template-columns: repeat(2, 1fr);
   }
-  &__movie {
-
-  }
   &__movie-image {
     width: 100%;
     height: 100%;
@@ -133,6 +136,10 @@ a {
     padding: 1% 2%;
     border: $border-size-base solid $color-grey-200;
     color: $color-grey-300;
+    @include media-mobile {
+      @include font-size-responsive(16);
+      @include line-height-responsive(20);
+    }
     &:first-child,
     &:last-child,{
       color: $color-green;
@@ -190,6 +197,10 @@ a {
       @include line-height-responsive(20);
       padding: 40px 50px;
     }
+    @include media-breakpoint-down($sm) {
+      margin-bottom: 20px;
+      padding: 20px 30px;
+    }
   }
   &__header-button {
     display: flex;
@@ -215,6 +226,7 @@ a {
       transform: rotate(-90deg);
     }
     @include media-mobile {
+      padding: 0;
       border: none;
     }
   }
@@ -238,7 +250,12 @@ a {
       grid-template-rows: auto 1fr 4fr;
       grid-gap: 50px;
       width: 90%;
-      height: 80%;
+      height: 75%;
+      margin-bottom: 50px;
+    }
+    @include media-breakpoint-down($sm) {
+      grid-template-rows: 6fr 1fr 4fr;
+      grid-gap: 20px;
     }
   }
   &__poster {
@@ -268,6 +285,10 @@ a {
     color: $color-grey-100;
     text-shadow: 0 2px 5px $color-grey-300;
     border-color: $color-grey-200;
+    @include media-mobile {
+      @include font-size-responsive(16);
+      @include line-height-responsive(20);
+    }
   }
   &__details {
     position: relative;
@@ -333,6 +354,7 @@ a {
     @include media-mobile {
       @include font-size-responsive(15);
       @include line-height-responsive(19);
+      padding-top: 20px;
     }
   }
 }
@@ -348,6 +370,9 @@ a {
       @include font-size-responsive(13);
       @include line-height-responsive(18);
       gap: 30px;
+    }
+    @include media-breakpoint-down($sm) {
+      margin-bottom: 30px;
     }
   }
   &__image {
@@ -402,8 +427,8 @@ a {
 }
 
 @font-face {
-  font-family: Roboto-Medium;
-  src: url(fonts/Roboto-Medium.ttf);
+  font-family: Roboto-Light;
+  src: url(fonts/Roboto-Light.ttf);
 }
 
 @font-face {
@@ -412,11 +437,11 @@ a {
 }
 
 @font-face {
-  font-family: Roboto-Bold;
-  src: url(fonts/Roboto-Bold.ttf);
+  font-family: Roboto-Medium;
+  src: url(fonts/Roboto-Medium.ttf);
 }
 
 @font-face {
-  font-family: Roboto-Light;
-  src: url(fonts/Roboto-Light.ttf);
+  font-family: Roboto-Bold;
+  src: url(fonts/Roboto-Bold.ttf);
 }
