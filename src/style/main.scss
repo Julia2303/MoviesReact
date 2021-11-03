@@ -212,11 +212,10 @@ a {
       @include width-responsive(200);
     }
     @include media-mobile {
-      @include width-responsive(50);
+      @include width-responsive(75);
     }
   }
   &__header-icon {
-    height: 100%;
     padding: 7px;
     border: $border-size-base solid $color-grey-200;
     border-radius: 50%;
@@ -227,6 +226,8 @@ a {
     }
     @include media-mobile {
       padding: 0;
+      width: 25px;
+      height: 25px;
       border: none;
     }
   }
@@ -254,6 +255,7 @@ a {
       margin-bottom: 30px;
     }
     @include media-breakpoint-down($sm) {
+      grid-template-columns: 2fr auto;
       grid-template-rows: 6fr 1fr 4fr;
       grid-gap: 20px;
     }
@@ -261,7 +263,6 @@ a {
   &__poster {
     grid-area: poster;
     height: 100%;
-    //width: 420px;
     box-shadow: 0 0 30px 10px $color-grey-300;
     @include media-mobile {
       width: 100%;
