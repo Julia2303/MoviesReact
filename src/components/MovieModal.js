@@ -46,7 +46,7 @@ const MovieModal = props => {
                         </div>
                     </div>
                 </div>
-                <h2 className="movie-modal__title--mobile">{movie.title}</h2>
+                <h2 className="movie-modal__title movie-modal__title--mobile">{movie.title}</h2>
                 <div className="movie-modal__description-container">
                     <p className="movie-modal__description">
                         {movie.overview}

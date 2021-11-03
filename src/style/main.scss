@@ -88,6 +88,7 @@ a {
 
 .main {
   padding: $space-30 $space-16;
+  min-height: 100vh;
   color: $color-grey-300;
   background-color: $color-grey-100;
   @include media-mobile {
@@ -188,17 +189,22 @@ a {
     align-items: center;
     margin-bottom: 50px;
     font-family: Roboto-Thin, sans-serif;
-    @include media-desktop {
+    @include media-breakpoint-up($bg) { //min-width 1401
       @include font-size-responsive(26);
       @include line-height-responsive(29);
-      padding: 80px 100px;
+      padding: 60px 80px;
     }
-    @include media-mobile {
-      @include font-size-responsive(20);
-      @include line-height-responsive(24);
+    @include media-breakpoint-down($bg) { //max-width 1400;
+      @include font-size-responsive(26);
+      @include line-height-responsive(29);
+      margin-bottom: 30px;
       padding: 40px 50px;
     }
-    @include media-breakpoint-down($sm) {
+    @include media-mobile { //max-width 1024
+      @include font-size-responsive(20);
+      @include line-height-responsive(24);
+    }
+    @include media-breakpoint-down($sm) { //max-width 754
       margin-bottom: 20px;
       padding: 20px 30px;
     }
@@ -308,6 +314,9 @@ a {
       }
       @include media-mobile {
         @include font-size-responsive(32);
+        @include line-height-responsive(36);
+        display: block;
+        margin-bottom: 0;
       }
     }
   }
